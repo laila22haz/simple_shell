@@ -1,3 +1,3 @@
 # Project Simple Shell
 
-###  Team: Laila Hazmir, Rabia Kassi
+###  Team: Laila Hazmir_Rabia Kassi
