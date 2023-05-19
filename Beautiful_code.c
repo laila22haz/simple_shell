@@ -1,5 +1,11 @@
 #include "simple_shell.h"
-int execute_command(char *command)
+
+/**
+ * execute_command - function that execute our command
+ * @command: command that will be execute
+ * Return: void
+ */
+void execute_command(char *command)
 {
 	pid_t pid = fork();
 	char **argv;
@@ -7,19 +13,19 @@ int execute_command(char *command)
 	if (pid < 0)
 	{
 		perror("Fork failed");
-		return (-1);
 	}
 	else if (pid == 0)
 	{
 		argv = _split(command);
-		if(execve(argv[0], argv, NULL)== -1)
+		if (execve(argv[0], argv, NULL) == -1)
 		{
 			perror("./hsh");
 		}
+		exit(0);
 	}
 	else
 	{
 		wait(NULL);
 	}
-	return 0;
+
 }

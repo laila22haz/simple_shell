@@ -9,5 +9,5 @@
 int _print(char *str);
 int _putchar(char c);
 char **_split(char *input);
-int execute_command(char *command);
+void execute_command(char *command);
 #endif

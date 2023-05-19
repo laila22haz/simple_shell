@@ -1,5 +1,9 @@
 #include "simple_shell.h"
-
+/**
+ * _split - A function that splits a string into slices.
+ * @input: The string to be split.
+ * Return: An array of slices.
+ */
 char **_split(char *input)
 {
 	char **argv;
@@ -7,8 +11,8 @@ char **_split(char *input)
 	int i = 0;
 	const char *delim = " \t\n";
 
-	argv = malloc(sizeof(char*) * 1024);
-	if(argv == NULL)
+	argv = malloc(sizeof(char *) * 1024);
+	if (argv == NULL)
 	{
 		perror("failed");
 	}
@@ -16,15 +20,6 @@ char **_split(char *input)
 	while (token != NULL)
 	{
 		argv[i++] = token;
-		token = strtok(NULL, delim);
-	}
-	i++;
-	argv = malloc(sizeof(char *) * i);
-	token = strtok(input, delim);
-	for (i = 0; token != NULL; i++)
-	{
-		argv[i] = malloc(sizeof(char) * strlen(token));
-		argv[i] = token;
 		token = strtok(NULL, delim);
 	}
 	argv[i] = NULL;
