@@ -10,7 +10,7 @@ int _strlen(char *s)
 {
 	int i;
 
-	for (i = 0 ; s[i] != '\0' ; i++);
+	for (i = 0 ; s[i] != '\0'; i++)
 	return (i);
 }
 
@@ -73,6 +73,7 @@ char *_strcat(char *dest, char *src)
 {
 	int i;
 	int j;
+
 	i = 0;
 	while (dest[i] != '\0')
 	{

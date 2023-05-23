@@ -1,11 +1,14 @@
 #include "simple_shell.h"
 
+/**********laila & rabia**********/
 /**
  * get_cmd - Searches for a command in the directories listed in the PATH.
  * @cmd: The name of the command to search for.
  *
  * Return: The full path of the command if found, NULL otherwise.
+ *
  */
+
 char *get_cmd(char *cmd)
 {
 	char *path = get_enviro("PATH");
