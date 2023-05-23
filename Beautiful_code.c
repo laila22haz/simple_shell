@@ -12,7 +12,7 @@ void execute_command(char *command)
 	char *ter;
 
 	argv = _split(command, " \t\n");
-	if (strcmp(argv[0], "exit") == 0)
+	if (_strcmp(argv[0], "exit") == 0)
 	{
 		exit(0);
 	}
@@ -22,7 +22,7 @@ void execute_command(char *command)
 	}
 	else if (pid == 0)
 	{
-		if (strcmp(argv[0], "ls") == 0 || strcmp(argv[0], "/bin/ls") == 0)
+		if (_strcmp(argv[0], "ls") == 0 || _strcmp(argv[0], "/bin/ls") == 0)
 			execve("/bin/ls", argv, environ);
 		else
 		{

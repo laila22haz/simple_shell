@@ -16,10 +16,10 @@ char *get_cmd(char *cmd)
 	dir = strtok(path, ":");
 	while (dir)
 	{
-		full_cmd = malloc(strlen(dir) + strlen(cmd) + 2);
-		strcpy(full_cmd, dir);
-		strcat(full_cmd, "/");
-		strcat(full_cmd, cmd);
+		full_cmd = malloc(_strlen(dir) + _strlen(cmd) + 2);
+		_strcpy(full_cmd, dir);
+		_strcat(full_cmd, "/");
+		_strcat(full_cmd, cmd);
 		if (stat(full_cmd, &file_stat) == 0)
 			return (full_cmd);
 		free(full_cmd);

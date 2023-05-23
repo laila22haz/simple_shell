@@ -10,6 +10,10 @@
 extern char **environ;
 int _print(char *str);
 int _putchar(char c);
+char *_strcat(char *dest, char *src);
+int _strcmp(const char *s1, char *s2);
+int _strlen(char *s);
+char *_strcpy(char *dest, char *src);
 char *get_enviro(const char *Var);
 char *get_cmd(char *cmd);
 char **_split(char *input, char *delim);
