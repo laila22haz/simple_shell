@@ -10,10 +10,11 @@
 
 void execute_command(char *command)
 {
-	pid_t pid = fork();
-	char **argv;
-	char *ter;
+	pid_t pid;
+	char **argv = NULL;
+	char *ter = NULL;
 
+	pid = fork();
 	argv = _split(command, " \t\n");
 	if (_strcmp(argv[0], "exit") == 0)
 	{
@@ -32,12 +33,16 @@ void execute_command(char *command)
 			ter = get_cmd(argv[0]);
 			if (!ter || execve(ter, argv, environ) == -1)
 				perror(":( ");
+			free(command);
+			free(argv);
+			exit(EXIT_FAILURE);
 		}
-		exit(EXIT_FAILURE);
 	}
 	else
 	{
 		wait(NULL);
+		free(ter);
+		free(argv);
 	}
 
 }

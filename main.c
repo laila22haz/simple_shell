@@ -16,7 +16,11 @@ int main(void)
 		_print(prompt);
 		read = getline(&command, &n, stdin);
 		if (read == -1)
-			return (-1);
+		{
+			_print("\n");
+			free(command);
+			exit(1);
+		}
 		execute_command(command);
 		free(command);
 		command = NULL;
