@@ -6,7 +6,7 @@
  */
 int main(void)
 {
-	char *command;
+	char *command = NULL;
 	char *prompt = "cisfun$ ";
 	size_t n = 0;
 	int read;
@@ -15,6 +15,8 @@ int main(void)
 	{
 		_print(prompt);
 		read = getline(&command, &n, stdin);
+		if ((read == 1 && command[0] == '\n') || check_blank(command) == 0)
+			continue;
 		if (read == -1)
 		{
 			_print("\n");

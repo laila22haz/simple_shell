@@ -10,8 +10,10 @@
 
 
 extern char **environ;
+
 int _print(char *str);
 int _putchar(char c);
+int check_blank(char *input);
 char *_strcat(char *dest, char *src);
 int _strcmp(const char *s1, char *s2);
 int _strlen(char *s);

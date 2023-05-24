@@ -90,3 +90,23 @@ char *_strcat(char *dest, char *src)
 	dest[i] = '\0';
 	return (dest);
 }
+/**
+ * check_blank - Checks if a string consists of only blank characters
+ * @input: The input string to check
+ *
+ * Return: 1 if the string is not entirely composed of blank characters,
+ *         0 if the string consists only of blank characters.
+ */
+int check_blank(char *input)
+{
+	int i = 0;
+
+	while (input[i] != '\n')
+	{
+		if (input[i] == ' ' || input[i] == '\t')
+			i++;
+		else
+			return (1);
+	}
+	return (0);
+}

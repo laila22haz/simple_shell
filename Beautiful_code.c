@@ -15,7 +15,7 @@ void execute_command(char *command)
 	char *ter = NULL;
 
 	pid = fork();
-	argv = _split(command, " \t\n");
+	argv = _split(command, " \t\"\'\n");
 	if (_strcmp(argv[0], "exit") == 0)
 	{
 		exit(0);
