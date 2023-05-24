@@ -1,5 +1,7 @@
 #include "simple_shell.h"
 
+/*******************team project laila & rabia******************/
+
 /**
  * _strlen - returns the length of a string
  * @s: string to evaluate
@@ -23,6 +25,7 @@ int _strlen(char *s)
  *
  * Return: s1[i] - s2[i]
  */
+
 int _strcmp(const char *s1, char *s2)
 {
 	int i;
@@ -46,6 +49,7 @@ int _strcmp(const char *s1, char *s2)
  * @src: copy from
  * Return: string
  */
+
 char *_strcpy(char *dest, char *src)
 {
 	int l = 0;
@@ -70,6 +74,7 @@ char *_strcpy(char *dest, char *src)
  *
  * Return: void
  */
+
 char *_strcat(char *dest, char *src)
 {
 	int i;
@@ -90,6 +95,7 @@ char *_strcat(char *dest, char *src)
 	dest[i] = '\0';
 	return (dest);
 }
+
 /**
  * check_blank - Checks if a string consists of only blank characters
  * @input: The input string to check
@@ -97,6 +103,7 @@ char *_strcat(char *dest, char *src)
  * Return: 1 if the string is not entirely composed of blank characters,
  *         0 if the string consists only of blank characters.
  */
+
 int check_blank(char *input)
 {
 	int i = 0;
