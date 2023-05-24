@@ -1,6 +1,7 @@
 #include "simple_shell.h"
 
 /**********laila & rabia**********/
+
 /**
  * get_enviro - Retrieves the value of an environment variable.
  * @Var: The name of the environment variable.
