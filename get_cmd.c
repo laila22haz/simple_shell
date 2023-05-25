@@ -11,7 +11,7 @@
 
 char *get_cmd(char *cmd)
 {
-gchar *path = get_enviro("PATH");
+char *path = get_enviro("PATH");
 	char *dir;
 	char *full_cmd;
 	struct stat file_stat;

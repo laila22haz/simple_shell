@@ -1,9 +1,12 @@
 #include "simple_shell.h"
+/********work team laila & rabia ***************/
+
 /**
  * main - check our simple shell
  *
  * Return: Always 0.
  */
+
 int main(void)
 {
 	char *command = NULL;
@@ -13,7 +16,8 @@ int main(void)
 
 	while (1)
 	{
-		_print(prompt);
+		if (isatty(STDIN_FILENO))
+			_print(prompt);
 		read = getline(&command, &n, stdin);
 		if ((read == 1 && command[0] == '\n') || check_blank(command) == 0)
 			continue;
