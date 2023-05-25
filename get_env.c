@@ -13,7 +13,7 @@
 char *get_enviro(const char *Var)
 {
 	int i = 0;
-	char *key;
+	char *key = NULL;
 
 	do {
 		key = strtok(environ[i], "=");

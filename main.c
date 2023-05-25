@@ -18,14 +18,13 @@ int main(void)
 	{
 		_print(prompt);
 		read = getline(&command, &n, stdin);
-		if ((read == 1 && command[0] == '\n') || check_blank(command) == 0)
-			continue;
-		if (read == -1)
+		if (read <= 0)
 		{
-			_print("\n");
 			free(command);
 			exit(1);
 		}
+		if ((read == 1 && command[0] == '\n') || check_blank(command) == 0)
+			continue;
 		execute_command(command);
 		free(command);
 		command = NULL;

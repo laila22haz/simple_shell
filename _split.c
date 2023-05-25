@@ -9,8 +9,8 @@
  */
 char **_split(char *input, char *delim)
 {
-	char **argv;
-	char *token;
+	char **argv = NULL;
+	char *token = NULL;
 	int i = 0;
 
 	argv = malloc(sizeof(char *) * 1024);

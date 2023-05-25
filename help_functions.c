@@ -108,12 +108,12 @@ int check_blank(char *input)
 {
 	int i = 0;
 
-	while (input[i] != '\n')
-	{
-		if (input[i] == ' ' || input[i] == '\t')
-			i++;
-		else
-			return (1);
-	}
-	return (0);
+		while (input[i] != '\0')
+		{
+			if (input[i] == ' ' || input[i] == '\t' || input[i] == '\n')
+				i++;
+			else
+				return (1);
+		}
+		return (0);
 }

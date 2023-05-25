@@ -12,8 +12,8 @@
 char *get_cmd(char *cmd)
 {
 char *path = get_enviro("PATH");
-	char *dir;
-	char *full_cmd;
+	char *dir = NULL;
+	char *full_cmd = NULL;
 	struct stat file_stat;
 
 	dir = strtok(path, ":");
