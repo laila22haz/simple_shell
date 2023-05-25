@@ -20,6 +20,7 @@ int main(void)
 		read = getline(&command, &n, stdin);
 		if (read <= 0)
 		{
+			_print("\n");
 			free(command);
 			exit(1);
 		}

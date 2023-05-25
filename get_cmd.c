@@ -11,12 +11,15 @@
 
 char *get_cmd(char *cmd)
 {
-char *path = get_enviro("PATH");
-	char *dir = NULL;
-	char *full_cmd = NULL;
+	char *path = get_enviro("PATH");
+	char *dir;
+	char *full_cmd, *copy;
 	struct stat file_stat;
 
-	dir = strtok(path, ":");
+	copy = malloc(sizeof(char) * (_strlen(path) + 1));
+	_strcpy(copy, path);
+
+	dir = strtok(copy, ":");
 	while (dir)
 	{
 		full_cmd = malloc(_strlen(dir) + _strlen(cmd) + 2);
@@ -28,5 +31,7 @@ char *path = get_enviro("PATH");
 		free(full_cmd);
 		dir = strtok(NULL, ":");
 	}
+	if (stat(cmd, &file_stat) == 0)
+		return (cmd);
 	return (NULL);
 }
