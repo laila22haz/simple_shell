@@ -16,8 +16,7 @@ int main(void)
 
 	while (1)
 	{
-		if (isatty(STDIN_FILENO))
-			_print(prompt);
+		_print(prompt);
 		read = getline(&command, &n, stdin);
 		if ((read == 1 && command[0] == '\n') || check_blank(command) == 0)
 			continue;
