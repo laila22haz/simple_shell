@@ -12,6 +12,7 @@
 extern char **environ;
 
 int _print(char *str);
+int isatty(int fd);
 int _putchar(char c);
 int check_blank(char *input);
 char *_strcat(char *dest, char *src);
