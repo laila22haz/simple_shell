@@ -13,7 +13,7 @@ void env_func(char **token_cmd)
 	
 	(void)token_cmd;
 
-	while(environ[i] != NULL)
+	while (environ[i] != NULL)
 	{
 		_puts(environ[i], STDOUT_FILENO);
 		_puts("\n", STDOUT_FILENO);
@@ -31,7 +31,7 @@ void exit_func(char **token_cmd)
 {
 	int i = 0, arg;
 
-	for(;token_cmd[i] != NULL; i++)
+	for (;token_cmd[i] != NULL; i++)
 		;
 	if (i == 1)
 	{
@@ -45,15 +45,15 @@ void exit_func(char **token_cmd)
 		arg = _atoi(token_cmd[1]);
 		if (arg == -1)
 		{
-			_puts(shell_name, STDERR_FILENO);
+			_puts(name, STDERR_FILENO);
 			_puts(": 1: exit: Illegal number: ", STDERR_FILENO);
-			_puts(tokenized_command[1], STDERR_FILENO);
+			_puts(token_cmd[1], STDERR_FILENO);
 			_puts("\n", STDERR_FILENO);
 			status = 2;
 		}
 		else
 		{
-			free(line);
+			free(lineptr);
 			free(token_cmd);
 			free(commands);
 			exit(arg);

@@ -13,18 +13,18 @@ int cmd_type(char *cmd)
 	char *intern_cmd[] = {"env", "exit", NULL};
 	char *path = NULL;
 
-	while(command[i] != '\0')
+	while (cmd[i] != '\0')
 	{
-		if (command[i] == '/')
+		if (cmd[i] == '/')
 			return (EXTEN_CMD);
 		i++;
 	}
 	for (i = 0; intern_cmd[i] != NULL; i++)
 	{
-		if (_strcmp(command, intern_cmd[i]) == 0)
+		if (_strcmp(cmd, intern_cmd[i]) == 0)
 			return (INTEN_CMD);
 	}
-	path = check_path(command);
+	path = get_cmd(cmd);
 	if (path != NULL)
 	{
 		free(path);
@@ -44,11 +44,11 @@ void execute_command(char **token_cmd, int check_command)
 {
 	void (*func)(char **cmd);
 
-	if (check_command== EXTEN_CMD)
+	if (check_command == EXTEN_CMD)
 	{
 		if (execve(token_cmd[0], token_cmd, NULL) == -1)
 		{
-			perror(_getenv("PWD"));
+			perror(get_enviro("PWD"));
 			exit(2);
 		}
 	}
@@ -56,11 +56,11 @@ void execute_command(char **token_cmd, int check_command)
 	{
 		if (execve(get_cmd(token_cmd[0]), token_cmd, NULL) == -1)
 		{
-			perror(_getenv("PWD"));
+			perror(get_enviro("PWD"));
 			exit(2);
 		}
 	}
-	if (cmd_typ == INTEN_CMD)
+	if (check_command == INTEN_CMD)
 	{
 		func = get_func(token_cmd[0]);
 		func(token_cmd);
@@ -118,13 +118,14 @@ char *get_cmd(char *cmd)
 void (*get_func(char *cmd))(char **)
 {
 	int i;
-	function_map mapping[] = {
+	
+	struct_func mapping[] = {
 		{"env", env_func}, {"exit", exit_func}
 	};
 
 	for (i = 0; i < 2; i++)
 	{
-		if (_strcmp(command, mapping[i].command_name) == 0)
+		if (_strcmp(cmd, mapping[i].name_cmd) == 0)
 			return (mapping[i].func);
 	}
 	return (NULL);

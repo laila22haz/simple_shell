@@ -19,7 +19,7 @@ void init_func(char **current_ , int typ_cmd)
 			execute_command(current_, typ_cmd);
 		else
 		{
-			waitpid(PID, &status, 0);
+			waitpid(child_pid, &status, 0);
 			status >>= 8;
 		}
 	}

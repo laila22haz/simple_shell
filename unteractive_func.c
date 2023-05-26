@@ -15,19 +15,19 @@ void uninteractive(void)
 	{
 		while (getline(&lineptr, &n, stdin) != -1)
 		{
-			rm_newline(lineptr);
-			rm_cmt(lineptr);
-			commands = tokenizer(lineptr, ";");
+			remove_N(lineptr);
+			remove_cmt(lineptr);
+			commands = _split(lineptr, ";");
 			while(commands[i] != NULL)
 			{
-				current_ = tokenizer(commands[i], " ");
+				current_ = _split(commands[i], " ");
 				if (current_[0] == NULL)
 				{
 					free(current_);
 					break;
 				}
-				typ_cmd = parse_command(current_[0]);
-				initializer(current_, typ_cmd);
+				typ_cmd = cmd_type(current_[0]);
+				init_func(current_, typ_cmd);
 				free(current_);
 			i++;
 			}

@@ -2,29 +2,26 @@
 
 
 /**
- * _strspn - function that gets the length of a prefix substring
- * @s: first value -char
- * @accept: second value - char
+ *_strspn - gets the length of a prefix substring
+ *@str1: string to be searched
+ *@str2: string to be used
  *
- * Return: char with result
+ *Return: number of bytes in the initial segment of 5 which are part of accept
  */
-unsigned int _strspn(char *s, char *accept)
-{
-    int j = 0, i = 0;
-    unsigned int a = 0;
 
-    while (s[i] != ' ' && s[i] != '\0')
-    {
-    while (accept[j] != '\0')
-    {
-    if (s[i] == accept[j])
-    a++;
-    j++;
-    }
-    i++;
-    j = 0;
-    }
-    return (a);
+int _strspn(char *str1, char *str2)
+{
+	int i = 0;
+	int match = 0;
+
+	while (str1[i] != '\0')
+	{
+		if (_strchr(str2, str1[i]) == NULL)
+			break;
+		match++;
+		i++;
+	}
+	return (match);
 }
 
 /**
@@ -58,50 +55,37 @@ int _strcspn(char *str1, char *str2)
  *
  * Return: char with result
  */
+
 char *_strchr(char *s, char c)
 {
+	int i = 0;
 
-    if (*s == '\0')
-    return (s);
-    while (*s)
-    {
-    if (*s == c)
-    {
-    return (s);
-    }
-    s++;
-    }
-    if (c == '\0')
-    return (s);
-    return ('\0');
+	for (; s[i] != c && s[i] != '\0'; i++)
+		;
+	if (s[i] == c)
+		return (s + i);
+	else
+		return (NULL);
 }
+
 /**
  * _strcat - concatenates two strings
- * @dest: input value
- * @src: input value
+ * @destination: input value
+ * @source: input value
  *
  * Return: void
  */
-char *_strcat(char *dest, char *src)
+char *_strcat(char *destination, char *source)
 {
-    int i;
-    int j;
+	char *new_string =  NULL;
+	int len_dest = _strlen(destination);
+	int len_source = _strlen(source);
 
-    i = 0;
-    while (dest[i] != '\0')
-    {
-        i++;
-    }
-    j = 0;
-    while (src[j] != '\0')
-    {
-        dest[i] = src[j];
-        i++;
-        j++;
-    }
-
-    dest[i] = '\0';
-    return (dest);
+	new_string = malloc(sizeof(*new_string) * (len_dest + len_source + 1));
+	_strcpy(destination, new_string);
+	_strcpy(source, new_string + len_dest);
+	new_string[len_dest + len_source] = '\0';
+	return (new_string);
 }
 /**
  * _strcmp - compare string values

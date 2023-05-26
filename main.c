@@ -1,63 +1,60 @@
 #include "shell.h"
 
 
-	char **commands = NULL;
-	char *line = NULL;
-	char *shell_name = NULL;
-	int status = 0;
+char **commands = NULL;
+char *lineptr = NULL;
+char *name = NULL;
+int status = 0;
 
 /**
- * main - the main shell code
- * @argc: number of arguments passed
- * @argv: program arguments to be parsed
+ * main - the main function
+ * @argc: number of arguments
+ * @argv: arguments to be parsed
  *
- * applies the functions in utils and helpers
- * implements EOF
- * Prints error on Failure
  * Return: 0 on success
  */
 
 
-int main(int argc __attribute__((unused)), char **argv)
+int main(int argc, char **argv)
 {
-	char **current_command = NULL;
-	int i, type_command = 0;
+	char **current_ = NULL;
+	int i, typ_cmd = 0;
 	size_t n = 0;
 
-	signal(SIGINT, ctrl_c_handler);
-	shell_name = argv[0];
+	(void)argc;
+	signal(SIGINT, ctrl_c);
+	name = argv[0];
 	while (1)
 	{
-		non_interactive();
-		print(" ($) ", STDOUT_FILENO);
-		if (getline(&line, &n, stdin) == -1)
+		uninteractive();
+		_puts(" ($) ", STDOUT_FILENO);
+		if (getline(&lineptr, &n, stdin) == -1)
 		{
-			free(line);
+			free(lineptr);
 			exit(status);
 		}
-			remove_newline(line);
-			remove_comment(line);
-			commands = tokenizer(line, ";");
+			remove_N(lineptr);
+			remove_cmt(lineptr);
+			commands = _split(lineptr, ";");
 
-		for (i = 0; commands[i] != NULL; i++)
+		i = 0;
+		while (commands[i] != NULL)
 		{
-			current_command = tokenizer(commands[i], " ");
-			if (current_command[0] == NULL)
+			current_ = _split(commands[i], " ");
+			if (current_[0] == NULL)
 			{
-				free(current_command);
+				free(current_);
 				break;
 			}
-			type_command = parse_command(current_command[0]);
+			typ_cmd = cmd_type(current_[0]);
 
-			/* initializer -   */
-			initializer(current_command, type_command);
-			free(current_command);
+			init_func(current_, typ_cmd);
+			free(current_);
+		i++;
 		}
 		free(commands);
 	}
-	free(line);
+	free(lineptr);
 
 	return (status);
 }
-
-	

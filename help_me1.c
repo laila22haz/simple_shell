@@ -21,26 +21,21 @@ void _puts(char *string, int stream)
 
 /**
  * char *_strcpy - a function that copies the string pointed to by src
- * @dest: copy to
- * @src: copy from
+ * @source: copy to
+ * @dest: copy from
  * Return: string
  */
 
-char *_strcpy(char *dest, char *src)
+void _strcpy(char *source, char *dest)
 {
-	int l = 0;
-	int x = 0;
+	int i = 0;
 
-	while (*(src + l) != '\0')
+	while (source[i] != '\0')
 	{
-		l++;
+		dest[i] = source[i];
+		i++;
 	}
-	for ( ; x < l ; x++)
-	{
-		dest[x] = src[x];
-	}
-	dest[l] = '\0';
-	return (dest);
+	dest[i] = '\0';
 }
 
 /**
@@ -53,6 +48,8 @@ int _strlen(char *s)
 {
 	int i;
 
+	if (string == NULL)
+		return (len);
 	for (i = 0; s[i] != '\0'; i++)
 		;
 	return (i);
@@ -65,37 +62,7 @@ int _strlen(char *s)
  *
  *Return: The next available token
  */
-char *_strtok_r(char *string, char *delim, char **save_ptr)
-{
-	char *finish;
 
-	if (string == NULL)
-		string = *save_ptr;
-
-	if (*string == '\0')
-	{
-		*save_ptr = string;
-		return (NULL);
-	}
-
-	string += _strspn(string, delim);
-	if (*string == '\0')
-	{
-		*save_ptr = string;
-		return (NULL);
-	}
-
-	finish = string + _strcspn(string, delim);
-	if (*finish == '\0')
-	{
-		*save_ptr = finish;
-		return (string);
-	}
-
-	*finish = '\0';
-	*save_ptr = finish + 1;
-	return (string);
-}
 
 /**
  * _atoi - converts a string to an integer
@@ -105,36 +72,17 @@ char *_strtok_r(char *string, char *delim, char **save_ptr)
  */
 int _atoi(char *s)
 {
-    int i, d, n, len, f, digit;
+	unsigned int n = 0;
 
-    i = 0;
-    d = 0;
-    n = 0;
-    len = 0;
-    f = 0;
-    digit = 0;
-    while (s[len] != '\0')
-    len++;
-    while (i < len && f == 0)
-    {
-    if (s[i] == '-')
-    ++d;
-    if (s[i] >= '0' && s[i] <= '9')
-    {
-    digit = s[i] - '0';
-    if (d % 2)
-    digit = -digit;
-    n = n * 10 + digit;
-    f = 1;
-    if (s[i + 1] < '0' || s[i + 1] > '9')
-    break;
-    f = 0;
-    }
-    i++;
-    }
-
-    if (f == 0)
-    return (0);
-
-    return (n);
+	do {
+		if (*s == '-')
+			return (-1);
+		else if ((*s < '0' || *s > '9') && *s != '\0')
+			return (-1);
+		else if (*s >= '0'  && *s <= '9')
+			n = (n * 10) + (*s - '0');
+		else if (n > 0)
+			break;
+	} while (*s++);
+	return (n);
 }
