@@ -1,34 +1,63 @@
-#include "simple_shell.h"
-/********work team laila & rabia ***************/
+#include "shell.h"
+
+
+	char **commands = NULL;
+	char *line = NULL;
+	char *shell_name = NULL;
+	int status = 0;
 
 /**
- * main - check our simple shell
+ * main - the main shell code
+ * @argc: number of arguments passed
+ * @argv: program arguments to be parsed
  *
- * Return: Always 0.
+ * applies the functions in utils and helpers
+ * implements EOF
+ * Prints error on Failure
+ * Return: 0 on success
  */
 
-int main(void)
-{
-	char *command = NULL;
-	char *prompt = "cisfun$ ";
-	size_t n = 0;
-	int read;
 
+int main(int argc __attribute__((unused)), char **argv)
+{
+	char **current_command = NULL;
+	int i, type_command = 0;
+	size_t n = 0;
+
+	signal(SIGINT, ctrl_c_handler);
+	shell_name = argv[0];
 	while (1)
 	{
-		if (isatty(STDIN_FILENO) == 1)
-			_print(prompt);
-		read = getline(&command, &n, stdin);
-		if (read <= 0)
+		non_interactive();
+		print(" ($) ", STDOUT_FILENO);
+		if (getline(&line, &n, stdin) == -1)
 		{
-			free(command);
-			exit(0);
+			free(line);
+			exit(status);
 		}
-		if ((read == 1 && command[0] == '\n') || check_blank(command) == 0)
-			continue;
-		execute_command(command);
-		free(command);
-		command = NULL;
+			remove_newline(line);
+			remove_comment(line);
+			commands = tokenizer(line, ";");
+
+		for (i = 0; commands[i] != NULL; i++)
+		{
+			current_command = tokenizer(commands[i], " ");
+			if (current_command[0] == NULL)
+			{
+				free(current_command);
+				break;
+			}
+			type_command = parse_command(current_command[0]);
+
+			/* initializer -   */
+			initializer(current_command, type_command);
+			free(current_command);
+		}
+		free(commands);
 	}
-	return (0);
+	free(line);
+
+	return (status);
 }
+
+	
