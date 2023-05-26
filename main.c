@@ -16,11 +16,11 @@ int main(void)
 
 	while (1)
 	{
-		_print(prompt);
+		if (isatty(STDIN_FILENO) == 1)
+			_print(prompt);
 		read = getline(&command, &n, stdin);
 		if (read <= 0)
 		{
-			_print("\n");
 			free(command);
 			exit(1);
 		}

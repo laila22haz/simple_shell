@@ -23,7 +23,10 @@ void execute_command(char *command)
 		exit(0);
 	}
 	if (pid < 0)
+	{
 		perror("Fork failed");
+		free(argv);
+	}
 	else if (pid == 0)
 	{
 		ter = get_cmd(argv[0]);
@@ -31,6 +34,7 @@ void execute_command(char *command)
 			perror(":( ");
 		free(command);
 		free(argv);
+		free(ter);
 		exit(EXIT_FAILURE);
 	}
 	else
