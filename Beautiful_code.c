@@ -20,6 +20,8 @@ void execute_command(char *command)
 	argv = _split(command, " \t\"\'\n");
 	if (_strcmp(argv[0], "exit") == 0)
 	{
+		free(command);
+		free(argv);
 		exit(0);
 	}
 	if (pid < 0)
