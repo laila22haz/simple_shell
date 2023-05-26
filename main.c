@@ -22,7 +22,7 @@ int main(void)
 		if (read <= 0)
 		{
 			free(command);
-			exit(1);
+			exit(0);
 		}
 		if ((read == 1 && command[0] == '\n') || check_blank(command) == 0)
 			continue;
