@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "simple_shell.h"
 
 /**
  * _split - Split a string into an array of tokens based on a delimiter.
@@ -33,4 +33,3 @@ char **_split(char *input, char *delim)
 	argv[i] = NULL;
 	return (argv);
 }
-

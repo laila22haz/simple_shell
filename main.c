@@ -1,60 +1,34 @@
-#include "shell.h"
-
-
-char **commands = NULL;
-char *lineptr = NULL;
-char *name = NULL;
-int status = 0;
+#include "simple_shell.h"
+/********work team laila & rabia ***************/
 
 /**
- * main - the main function
- * @argc: number of arguments
- * @argv: arguments to be parsed
+ * main - check our simple shell
  *
- * Return: 0 on success
+ * Return: Always 0.
  */
 
-
-int main(int argc, char **argv)
+int main(void)
 {
-	char **current_ = NULL;
-	int i, typ_cmd = 0;
+	char *command = NULL;
+	char *prompt = "cisfun$ ";
 	size_t n = 0;
+	int read;
 
-	(void)argc;
-	signal(SIGINT, ctrl_c);
-	name = argv[0];
 	while (1)
 	{
-		uninteractive();
-		_puts(" ($) ", STDOUT_FILENO);
-		if (getline(&lineptr, &n, stdin) == -1)
+		if (isatty(STDIN_FILENO) == 1)
+			_print(prompt);
+		read = getline(&command, &n, stdin);
+		if (read <= 0)
 		{
-			free(lineptr);
-			exit(status);
+			free(command);
+			exit(0);
 		}
-			remove_N(lineptr);
-			remove_cmt(lineptr);
-			commands = _split(lineptr, ";");
-
-		i = 0;
-		while (commands[i] != NULL)
-		{
-			current_ = _split(commands[i], " ");
-			if (current_[0] == NULL)
-			{
-				free(current_);
-				break;
-			}
-			typ_cmd = cmd_type(current_[0]);
-
-			init_func(current_, typ_cmd);
-			free(current_);
-		i++;
-		}
-		free(commands);
+		if ((read == 1 && command[0] == '\n') || check_blank(command) == 0)
+			continue;
+		execute_command(command);
+		free(command);
+		command = NULL;
 	}
-	free(lineptr);
-
-	return (status);
+	return (0);
 }
