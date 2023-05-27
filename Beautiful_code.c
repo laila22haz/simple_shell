@@ -18,11 +18,9 @@ void execute_command(char *command)
 
 	pid = fork();
 	argv = _split(command, " \t\"\'\n");
-	if (_strcmp(argv[0], "exit") == 0)
+	if (handle_built(argv, command, -1))
 	{
-		free(command);
-		free(argv);
-		exit(0);
+		return;
 	}
 	if (pid < 0)
 	{
@@ -41,7 +39,8 @@ void execute_command(char *command)
 	}
 	else
 	{
-		wait(&status);
+		waitpid(pid, &status, 0);
+		status >>= 8;
 		free(ter);
 		free(argv);
 	}
