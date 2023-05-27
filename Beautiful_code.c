@@ -18,9 +18,11 @@ void execute_command(char *command)
 
 	pid = fork();
 	argv = _split(command, " \t\"\'\n");
-	if (handle_built(argv, command, -1))
+	if (_strcmp(argv[0], "exit") == 0)
 	{
-		return;
+		free(command);
+		free(argv);
+		exit(0);
 	}
 	if (pid < 0)
 	{

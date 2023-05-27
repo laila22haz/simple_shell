@@ -23,6 +23,5 @@ char *get_enviro(const char *Var);
 char *get_cmd(char *cmd);
 char **_split(char *input, char *delim);
 void execute_command(char *command);
-int handle_built(char **args , char *command, int exit_num);
 
 #endif
